@@ -23,16 +23,16 @@ export class AddUsuarioPage implements OnInit {
     private provider: Api,
     private actRouter: ActivatedRoute,
     private toastController: ToastController,
-    ){  }
+  ) { }
 
   ngOnInit() {
     //ACT SERVE PARA PASSAR E RECEBER PARAMETROS ENTRE PÁGINAS
-    this.actRouter.params.subscribe((data:any)=>{
+    this.actRouter.params.subscribe((data: any) => {
 
     });
   }
 
-  async mensagem(mensagem: any, cor){
+  async mensagem(mensagem: any, cor) {
     const toast = await this.toastController.create({
       message: mensagem,
       duration: 5000,
@@ -41,11 +41,11 @@ export class AddUsuarioPage implements OnInit {
     toast.present();
   }
 
-  usuarios(){
+  usuarios() {
     this.router.navigate(['usuarios']);
   }
 
-  cadastrar(){
+  cadastrar() {
     //Essa estrutura é que chama uma API
     return new Promise(resolve => {
       let dados = {
@@ -56,23 +56,32 @@ export class AddUsuarioPage implements OnInit {
         nivel: this.nivel
       }
       this.provider.dadosApi(dados, 'usuarios/inserir.php')
-      .subscribe(
-        data=>{
-          console.log('teste');
-          if(data['ok'] == true){
-            this.mensagem(data['mensagem'], 'success');
-            this.router.navigate(['usuarios']);
+        .subscribe(
+          data => {
+            console.log('teste');
+            if (data['ok'] == true) {
+              this.mensagem(data['mensagem'], 'success');
+              this.router.navigate(['usuarios']);
+              this.limparCampos();
+            }
+            else {
+              this.mensagem(data['mensagem'], 'danger');
+            }
           }
-          else{
-            this.mensagem(data['mensagem'], 'danger');
-          }
-        }
-      );
+        );
     });
   }
 
-  editar(){
+  editar() {
 
+  }
+
+  limparCampos() {
+    this.nome = '';
+    this.cpf = '';
+    this.email = '';
+    this.senha = '';
+    this.nivel = '';
   }
 
 }
