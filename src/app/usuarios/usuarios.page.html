@@ -26,7 +26,7 @@
     <ion-list>
         <ion-item-sliding *ngFor="let item of itens">
             <ion-item-options side="start">
-                <ion-item-option (click)="editar(item.id, item.nome, item.cpf, item.email, item.telefone, item.endereco, item.obs)">
+                <ion-item-option (click)="editar(item.id, item.nome, item.cpf, item.email, item.senha, item.nivel)">
                     Editar
                 </ion-item-option>
             </ion-item-options>
@@ -38,7 +38,7 @@
             </ion-item>
 
             <ion-item-options side="end">
-                <ion-item-option (click)="mostrar(item.id, item.nome, item.cpf, item.email, item.telefone, item.endereco, item.obs)" color="secondary">
+                <ion-item-option (click)="mostrar(item.id, item.nome, item.cpf, item.email, item.senha, item.nivel)" color="secondary">
                     Mostrar
                 </ion-item-option>
                 <ion-item-option (click)="excluir(item.id)" color="danger">

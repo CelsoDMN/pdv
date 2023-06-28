@@ -79,12 +79,12 @@ export class UsuariosPage implements OnInit {
 
   }
 
-  editar(id: any, nome: string, cpf: string, email: string, telefone: string, endereco: string, obs: string) {
+  editar(id: any, nome: string, cpf: string, email: string, senha: string, nivel: string) {
 
   }
 
-  mostrar(id: any, nome: string, cpf: string, email: string, telefone: string, endereco: string, obs: string) {
-
+  mostrar(id: any, nome: string, cpf: string, email: string, senha: string, nivel: string) {
+    this.router.navigate(['mostrar-usuario/' + id + '/'+ nome + '/'+ cpf + '/'+ email + '/'+ senha + '/'+ nivel]);
   }
 
   excluir(id: any) {
