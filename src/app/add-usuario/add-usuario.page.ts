@@ -17,6 +17,8 @@ export class AddUsuarioPage implements OnInit {
   senha: string = "";
   nivel: string = "";
   id: string = "";
+  antigo: string = "";
+  antigo2: string = "";
 
   constructor(
     private router: Router,
@@ -28,7 +30,14 @@ export class AddUsuarioPage implements OnInit {
   ngOnInit() {
     //ACT SERVE PARA PASSAR E RECEBER PARAMETROS ENTRE PÁGINAS
     this.actRouter.params.subscribe((data: any) => {
-
+      this.id = data.id;
+      this.nome = data.nome;
+      this.cpf = data.cpf;
+      this.email = data.email;
+      this.senha = data.senha;
+      this.nivel = data.nivel;
+      this.antigo = data.email;
+      this.antigo2 = data.cpf;
     });
   }
 
@@ -53,7 +62,11 @@ export class AddUsuarioPage implements OnInit {
         cpf: this.cpf,
         email: this.email,
         senha: this.senha,
-        nivel: this.nivel
+        nivel: this.nivel,
+        id: this.id,
+        antigo: this.antigo,
+        antigo2: this.antigo2,
+
       }
       this.provider.dadosApi(dados, 'usuarios/inserir.php')
         .subscribe(
@@ -70,10 +83,6 @@ export class AddUsuarioPage implements OnInit {
           }
         );
     });
-  }
-
-  editar() {
-
   }
 
   limparCampos() {

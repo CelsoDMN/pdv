@@ -80,7 +80,7 @@ export class UsuariosPage implements OnInit {
   }
 
   editar(id: any, nome: string, cpf: string, email: string, senha: string, nivel: string) {
-
+    this.router.navigate(['add-usuario/' + id + '/'+ nome + '/'+ cpf + '/'+ email + '/'+ senha + '/'+ nivel]);
   }
 
   mostrar(id: any, nome: string, cpf: string, email: string, senha: string, nivel: string) {
@@ -88,7 +88,34 @@ export class UsuariosPage implements OnInit {
   }
 
   excluir(id: any) {
+    //Essa estrutura é que chama uma API
+    return new Promise(resolve => {
+      let dados = {
+        id: id
+      }
+      this.provider.dadosApi(dados, 'usuarios/excluir.php')
+        .subscribe(
+          data => {
+            console.log('teste');
+            if (data['ok'] == true) {
+              this.carregar();
+              this.mensagem(data['mensagem'], 'success');
+            }
+            else {
+              this.mensagem(data['mensagem'], 'danger');
+            }
+          }
+        );
+    });
+  }
 
+  async mensagem(mensagem: any, cor) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      duration: 5000,
+      color: cor
+    });
+    toast.present();
   }
 
 }
